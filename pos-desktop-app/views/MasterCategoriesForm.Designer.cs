@@ -113,6 +113,7 @@
             this.btn_category_delete.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.btn_category_delete.UseSelectable = true;
             this.btn_category_delete.UseStyleColors = true;
+            this.btn_category_delete.Click += new System.EventHandler(this.btn_category_delete_Click);
             // 
             // btn_category_update
             // 
@@ -125,6 +126,7 @@
             this.btn_category_update.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.btn_category_update.UseSelectable = true;
             this.btn_category_update.UseStyleColors = true;
+            this.btn_category_update.Click += new System.EventHandler(this.btn_category_update_Click);
             // 
             // btn_category_add
             // 
@@ -215,6 +217,8 @@
             // 
             // dgv_categories
             // 
+            this.dgv_categories.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_categories.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_categories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_categories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_categories.Location = new System.Drawing.Point(0, 0);
@@ -223,6 +227,7 @@
             this.dgv_categories.RowTemplate.Height = 24;
             this.dgv_categories.Size = new System.Drawing.Size(1192, 478);
             this.dgv_categories.TabIndex = 2;
+            this.dgv_categories.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_categories_RowHeaderMouseClick);
             // 
             // Categories
             // 
@@ -236,6 +241,7 @@
             this.Text = "Categories";
             this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.Load += new System.EventHandler(this.Categories_Load);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
