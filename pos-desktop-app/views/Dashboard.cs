@@ -30,5 +30,11 @@ namespace pos_desktop_app.views
             Categories cf =  new Categories();
             cf.Show();
         }
+
+        private void mt_suppliers_Click(object sender, EventArgs e)
+        {
+            Suppliers cf = new Suppliers();
+            cf.Show();
+        }
     }
 }
