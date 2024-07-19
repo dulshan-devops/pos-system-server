@@ -34,7 +34,7 @@ namespace pos_system.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCategory(AddCategory addCategory)
+        public IActionResult AddCategory(Category addCategory)
         {
             var category = new Category()
             {
@@ -49,7 +49,7 @@ namespace pos_system.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateCategory(int id, UpdateCategory updateCategory)
+        public IActionResult UpdateCategory(int id, Category updateCategory)
         {
             var cat = dbContext.Category.Find(id);
 

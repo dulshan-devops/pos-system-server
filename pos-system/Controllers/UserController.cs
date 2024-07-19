@@ -34,7 +34,7 @@ namespace pos_system.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddUsers(AddUser addUser)
+        public IActionResult AddUsers(User addUser)
         {
             var user = new User()
             {
@@ -51,7 +51,7 @@ namespace pos_system.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateUser(int id, UpdateUser updateUser)
+        public IActionResult UpdateUser(int id, User updateUser)
         {
             var user = dbContext.Users.Find(id);
 
