@@ -34,9 +34,9 @@
             this.flp_dashboard = new System.Windows.Forms.FlowLayoutPanel();
             this.mt_departments = new MetroFramework.Controls.MetroTile();
             this.mt_users = new MetroFramework.Controls.MetroTile();
+            this.mt_suppliers = new MetroFramework.Controls.MetroTile();
             this.mt_categories = new MetroFramework.Controls.MetroTile();
             this.mt_products = new MetroFramework.Controls.MetroTile();
-            this.mt_suppliers = new MetroFramework.Controls.MetroTile();
             this.mt_customers = new MetroFramework.Controls.MetroTile();
             this.tab_tools = new System.Windows.Forms.TabPage();
             this.tab_reports = new System.Windows.Forms.TabPage();
@@ -58,7 +58,7 @@
             this.metroTabControl1.Size = new System.Drawing.Size(1192, 699);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTabControl1.TabIndex = 0;
-            this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabControl1.UseSelectable = true;
             // 
             // tab_master
@@ -122,6 +122,25 @@
             this.mt_users.UseStyleColors = true;
             this.mt_users.UseTileImage = true;
             // 
+            // mt_suppliers
+            // 
+            this.mt_suppliers.ActiveControl = null;
+            this.mt_suppliers.Location = new System.Drawing.Point(305, 3);
+            this.mt_suppliers.Name = "mt_suppliers";
+            this.mt_suppliers.Size = new System.Drawing.Size(145, 127);
+            this.mt_suppliers.Style = MetroFramework.MetroColorStyle.Green;
+            this.mt_suppliers.TabIndex = 3;
+            this.mt_suppliers.Text = "Suppliers";
+            this.mt_suppliers.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.mt_suppliers.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.mt_suppliers.TileImage = ((System.Drawing.Image)(resources.GetObject("mt_suppliers.TileImage")));
+            this.mt_suppliers.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.mt_suppliers.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.mt_suppliers.UseSelectable = true;
+            this.mt_suppliers.UseStyleColors = true;
+            this.mt_suppliers.UseTileImage = true;
+            this.mt_suppliers.Click += new System.EventHandler(this.mt_suppliers_Click);
+            // 
             // mt_categories
             // 
             this.mt_categories.ActiveControl = null;
@@ -158,25 +177,6 @@
             this.mt_products.UseSelectable = true;
             this.mt_products.UseStyleColors = true;
             this.mt_products.UseTileImage = true;
-            // 
-            // mt_suppliers
-            // 
-            this.mt_suppliers.ActiveControl = null;
-            this.mt_suppliers.Location = new System.Drawing.Point(305, 3);
-            this.mt_suppliers.Name = "mt_suppliers";
-            this.mt_suppliers.Size = new System.Drawing.Size(145, 127);
-            this.mt_suppliers.Style = MetroFramework.MetroColorStyle.Green;
-            this.mt_suppliers.TabIndex = 3;
-            this.mt_suppliers.Text = "Suppliers";
-            this.mt_suppliers.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.mt_suppliers.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.mt_suppliers.TileImage = ((System.Drawing.Image)(resources.GetObject("mt_suppliers.TileImage")));
-            this.mt_suppliers.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.mt_suppliers.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.mt_suppliers.UseSelectable = true;
-            this.mt_suppliers.UseStyleColors = true;
-            this.mt_suppliers.UseTileImage = true;
-            this.mt_suppliers.Click += new System.EventHandler(this.mt_suppliers_Click);
             // 
             // mt_customers
             // 
@@ -224,7 +224,6 @@
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Dashboard";
             this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
-            this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroTabControl1.ResumeLayout(false);
             this.tab_master.ResumeLayout(false);
             this.flp_dashboard.ResumeLayout(false);

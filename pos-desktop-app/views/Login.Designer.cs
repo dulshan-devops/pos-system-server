@@ -73,7 +73,7 @@
             this.tb_email.Style = MetroFramework.MetroColorStyle.Green;
             this.tb_email.TabIndex = 0;
             this.tb_email.Text = "Email";
-            this.tb_email.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.tb_email.Theme = MetroFramework.MetroThemeStyle.Light;
             this.tb_email.UseSelectable = true;
             this.tb_email.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_email.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -109,7 +109,7 @@
             this.tb_password.Style = MetroFramework.MetroColorStyle.Green;
             this.tb_password.TabIndex = 1;
             this.tb_password.Text = "Password";
-            this.tb_password.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.tb_password.Theme = MetroFramework.MetroThemeStyle.Light;
             this.tb_password.UseSelectable = true;
             this.tb_password.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tb_password.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -123,7 +123,7 @@
             this.btn_login.Style = MetroFramework.MetroColorStyle.Green;
             this.btn_login.TabIndex = 2;
             this.btn_login.Text = "Login";
-            this.btn_login.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.btn_login.Theme = MetroFramework.MetroThemeStyle.Light;
             this.btn_login.UseSelectable = true;
             this.btn_login.UseStyleColors = true;
             this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
@@ -146,9 +146,9 @@
             this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(708, 684);
-            this.metroPanel1.Style = MetroFramework.MetroColorStyle.Green;
+            this.metroPanel1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroPanel1.TabIndex = 3;
-            this.metroPanel1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroPanel1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 13;
@@ -156,15 +156,16 @@
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
+            this.metroLabel4.BackColor = System.Drawing.Color.Black;
             this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel4.ForeColor = System.Drawing.Color.Black;
             this.metroLabel4.Location = new System.Drawing.Point(317, 218);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(48, 20);
-            this.metroLabel4.Style = MetroFramework.MetroColorStyle.White;
+            this.metroLabel4.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLabel4.TabIndex = 6;
             this.metroLabel4.Text = "Login";
-            this.metroLabel4.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel4.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroLabel4.UseStyleColors = true;
             // 
             // metroLabel3
@@ -178,21 +179,22 @@
             this.metroLabel3.Style = MetroFramework.MetroColorStyle.White;
             this.metroLabel3.TabIndex = 5;
             this.metroLabel3.Text = "@Copyright Nova Technologies - 2024";
-            this.metroLabel3.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel3.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroLabel3.UseStyleColors = true;
             // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
+            this.metroLabel2.BackColor = System.Drawing.Color.Black;
             this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.metroLabel2.ForeColor = System.Drawing.Color.Black;
             this.metroLabel2.Location = new System.Drawing.Point(230, 251);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(229, 20);
-            this.metroLabel2.Style = MetroFramework.MetroColorStyle.White;
+            this.metroLabel2.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLabel2.TabIndex = 5;
             this.metroLabel2.Text = "Welcome to Nova Technologies";
-            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroLabel2.UseStyleColors = true;
             // 
             // metroLabel1
@@ -206,7 +208,7 @@
             this.metroLabel1.Style = MetroFramework.MetroColorStyle.Orange;
             this.metroLabel1.TabIndex = 3;
             this.metroLabel1.Text = "You need admin access to manage the store";
-            this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroLabel1.UseStyleColors = true;
             // 
             // pictureBox2
@@ -232,7 +234,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center;
-            this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
