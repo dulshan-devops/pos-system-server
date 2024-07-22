@@ -15,7 +15,7 @@ namespace pos_desktop_app.services
         {
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:7038") // Replace with your actual API base URL
+                BaseAddress = new Uri("https://nova-pos-system-api.azurewebsites.net") // Replace with your actual API base URL
             };
         }
 
