@@ -36,5 +36,11 @@ namespace pos_desktop_app.views
             Suppliers cf = new Suppliers();
             cf.Show();
         }
+
+        private void mt_products_Click(object sender, EventArgs e)
+        {
+            MasterProductsForm pf = new MasterProductsForm();
+            pf.Show();
+        }
     }
 }

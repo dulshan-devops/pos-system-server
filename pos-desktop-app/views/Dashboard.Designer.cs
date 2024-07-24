@@ -177,6 +177,7 @@
             this.mt_products.UseSelectable = true;
             this.mt_products.UseStyleColors = true;
             this.mt_products.UseTileImage = true;
+            this.mt_products.Click += new System.EventHandler(this.mt_products_Click);
             // 
             // mt_customers
             // 
