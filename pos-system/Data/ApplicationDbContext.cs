@@ -14,5 +14,6 @@ namespace pos_system.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<Department> Department { get; set; }
         public DbSet<Supplier> Supplier { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

@@ -5,5 +5,7 @@
         public int DepartmentId { get; set; }
         public required string DepartmentName { get; set; }
         public string? Desc { get; set; }
+
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }
