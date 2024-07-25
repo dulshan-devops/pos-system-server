@@ -97,14 +97,14 @@ namespace pos_desktop_app.views
                 {
                     int selectedRowIndex = dgv_categories.SelectedRows[0].Index;
                     Catergory selectedCategory = (Catergory)dgv_categories.Rows[selectedRowIndex].DataBoundItem;
-                    selectedCategory.categoryId = selectedCategory.categoryId;
-                    selectedCategory.name = tb_category.Text;
-                    selectedCategory.desc = tb_category_desc.Text;
+                    selectedCategory.CategoryId = selectedCategory.CategoryId;
+                    selectedCategory.Name = tb_category.Text;
+                    selectedCategory.Desc = tb_category_desc.Text;
                     HttpResponseMessage response = await _apiService.updateCategory(selectedCategory);
 
                     if (response.IsSuccessStatusCode)
                     {
-                        MetroMessageBox.Show(this, $"{selectedCategory.name} Category Updated Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MetroMessageBox.Show(this, $"{selectedCategory.Name} Category Updated Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         // Refresh the DataGridView
                         HttpResponseMessage catResponse = await _apiService.getCategories();
                         refreshUi.RefreshDgv<Catergory>(catResponse, dgv_categories);

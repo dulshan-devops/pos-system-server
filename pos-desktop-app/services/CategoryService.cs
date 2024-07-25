@@ -32,7 +32,7 @@ namespace pos_desktop_app
 
         public async Task<HttpResponseMessage> saveCategories(string cat, string desc)
         {
-            var catData = new { name = cat, desc = desc };
+            var catData = new { Name = cat, Desc = desc };
             var content = new StringContent(JsonConvert.SerializeObject(catData), Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await _httpClient.PostAsync("/api/Category", content);
@@ -41,20 +41,20 @@ namespace pos_desktop_app
 
         public async Task<HttpResponseMessage> updateCategory(Catergory category)
         {
-            var catData = new { categoryId = category.categoryId, name = category.name, desc = category.desc };
+            var catData = new { CategoryId = category.CategoryId, Name = category.Name, desc = category.Desc };
             var content = new StringContent(JsonConvert.SerializeObject(catData), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await _httpClient.PutAsync($"/api/Category?id={category.categoryId}", content);
+            HttpResponseMessage response = await _httpClient.PutAsync($"/api/Category?id={category.CategoryId}", content);
             //Console.WriteLine(category);
             return response;
         }
 
         public async Task<HttpResponseMessage> deleteCategory(Catergory category)
         {
-            var catData = new { categoryId = category.categoryId, name = category.name, desc = category.desc };
+            var catData = new { CategoryId = category.CategoryId, Name = category.Name, Desc = category.Desc };
             var content = new StringContent(JsonConvert.SerializeObject(catData), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await _httpClient.DeleteAsync($"/api/Category?id={category.categoryId}");
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"/api/Category?id={category.CategoryId}");
             return response;
         }
     }
