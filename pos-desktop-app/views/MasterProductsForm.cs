@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Controls;
 using MetroFramework.Forms;
 using pos_desktop_app.models;
 using pos_desktop_app.services;
@@ -25,6 +26,21 @@ namespace pos_desktop_app.views
         private ProductService _apiProductService;
         private UiRefresher refreshUi = new UiRefresher();
 
+        List<ComboBoxItem> warrantyItems = new List<ComboBoxItem>
+        {
+            new ComboBoxItem { DisplayName = "Yes", Value = 1 },
+            new ComboBoxItem { DisplayName = "No", Value = 0 }
+        };
+
+        List<ComboBoxItem> unitItems = new List<ComboBoxItem>
+        {
+            new ComboBoxItem { DisplayName = "Peaces", Value = "peaces" },
+            new ComboBoxItem { DisplayName = "Kg", Value = "kg" },
+            new ComboBoxItem { DisplayName = "G", Value = "g" },
+            new ComboBoxItem { DisplayName = "Liter", Value = "l" },
+            new ComboBoxItem { DisplayName = "Ml", Value = "ml" }
+        };
+
         public MasterProductsForm()
         {
             InitializeComponent();
@@ -44,9 +60,13 @@ namespace pos_desktop_app.views
 
                 if (depRes.IsSuccessStatusCode && supRes.IsSuccessStatusCode && catRes.IsSuccessStatusCode)
                 {
-                    refreshUi.RefreshCombo<Department>(depRes , cb_department , "DepartmentId", "DepartmentName");
-                    refreshUi.RefreshCombo<Supplier>(supRes, cb_supplier , "SupplierId", "SupplierName");
-                    refreshUi.RefreshCombo<Catergory>(catRes, cb_category , "CategoryId", "Name");
+                    refreshUi.RefreshCombo<Department>(depRes, cb_department, "DepartmentId", "DepartmentName");
+                    refreshUi.RefreshCombo<Supplier>(supRes, cb_supplier, "SupplierId", "SupplierName");
+                    refreshUi.RefreshCombo<Catergory>(catRes, cb_category, "CategoryId", "Name");
+
+                    //units and warranty
+                    refreshUi.RefreshComboWithList<ComboBoxItem>(warrantyItems, cb_warranty, "Value" , "DisplayName");
+                    refreshUi.RefreshComboWithList<ComboBoxItem>(unitItems, cb_unit, "Value" , "DisplayName");
                 }
                 else
                 {

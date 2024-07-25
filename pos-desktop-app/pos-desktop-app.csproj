@@ -83,6 +83,7 @@
     <Compile Include="services\SupplierService.cs" />
     <Compile Include="services\CategoryService.cs" />
     <Compile Include="services\DepartmentService.cs" />
+    <Compile Include="utils\ComboBoxItem.cs" />
     <Compile Include="utils\UiRefresher.cs" />
     <Compile Include="views\Dashboard.cs">
       <SubType>Form</SubType>

@@ -19,7 +19,7 @@ namespace pos_desktop_app.utils
             table.DataSource = data;
         }
 
-        public async void RefreshCombo<T>(HttpResponseMessage response, MetroComboBox comboBox ,string id , string idText)
+        public async void RefreshCombo<T>(HttpResponseMessage response, MetroComboBox comboBox, string id, string idText)
         {
             try
             {
@@ -35,6 +35,27 @@ namespace pos_desktop_app.utils
                 // Assuming T has properties named "Id" and "Column Name"
                 comboBox.DisplayMember = idText;
                 comboBox.ValueMember = id;
+            }
+            catch (Exception ex)
+            {
+                // Handle deserialization or binding errors
+                MessageBox.Show($"Failed to bind combo box: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void RefreshComboWithList<T>(List<T> data, MetroComboBox comboBox, string id, string idText)
+        {
+            try
+            {
+                // Clear the existing items in the combo box
+                comboBox.Items.Clear();
+
+                // Set the DisplayMember and ValueMember properties of the combo box
+                comboBox.DisplayMember = idText;
+                comboBox.ValueMember = id;
+
+                // Add the items from the data list to the combo box
+                comboBox.DataSource = data;
             }
             catch (Exception ex)
             {
