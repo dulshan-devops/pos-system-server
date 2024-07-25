@@ -83,5 +83,33 @@ namespace pos_desktop_app.views
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void cb_warranty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cb_warranty.SelectedItem != null)
+            {
+                // Cast the selected item to ComboBoxItem
+                ComboBoxItem selectedItem = (ComboBoxItem)cb_warranty.SelectedItem;
+
+                // Check if "No" is selected in the warranty ComboBox
+                if (selectedItem.Value.Equals(0))
+                {
+                    // Disable the warranty period TextBox
+                    tb_warranty_period.Enabled = false;
+                    // Clear the text in the TextBox
+                    tb_warranty_period.Text = "";
+                }
+                else
+                {
+                    // Enable the warranty period TextBox
+                    tb_warranty_period.Enabled = true;
+                }
+            }
+            else
+            {
+                // Enable the warranty period TextBox
+                tb_warranty_period.Enabled = true;
+            }
+        }
     }
 }
