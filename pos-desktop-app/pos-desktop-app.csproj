@@ -79,6 +79,7 @@
     <Compile Include="models\LoginSuccessResponse.cs" />
     <Compile Include="models\Supplier.cs" />
     <Compile Include="services\ApiServices.cs" />
+    <Compile Include="services\ProductService.cs" />
     <Compile Include="services\SupplierService.cs" />
     <Compile Include="services\CategoryService.cs" />
     <Compile Include="services\DepartmentService.cs" />
