@@ -111,5 +111,13 @@ namespace pos_desktop_app.views
                 tb_warranty_period.Enabled = true;
             }
         }
+
+        private void btn_product_add_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tb_product_code.Text) || string.IsNullOrEmpty(tb_cost_price.Text) || string.IsNullOrEmpty(tb_selling_price.Text) || string.IsNullOrEmpty(tb_wholesale_price.Text))
+            {
+                MetroMessageBox.Show(this, "Please fill the all required fields..!" , "Empty Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
