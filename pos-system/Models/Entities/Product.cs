@@ -21,8 +21,8 @@ namespace pos_system.Models.Entities
         public string? Desc { get; set; }
         public string? Unit { get; set; }
 
-        public Department Department { get; set; } = null!;
-        public Category Category { get; set; } = null!;
-        public Supplier Supplier { get; set; } = null!;
+        public Department? Department { get; set; }
+        public Category? Category { get; set; }
+        public Supplier? Supplier { get; set; }
     }
 }

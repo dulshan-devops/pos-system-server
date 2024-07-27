@@ -6,6 +6,6 @@
         public required string DepartmentName { get; set; }
         public string? Desc { get; set; }
 
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Product>? Products { get; set; } = new List<Product>();
     }
 }
