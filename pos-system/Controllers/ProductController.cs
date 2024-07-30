@@ -14,10 +14,6 @@ namespace pos_system.Controllers
     public class ProductController : ControllerBase
     {
         public readonly ApplicationDbContext dbContext;
-        public JsonSerializerOptions options = new JsonSerializerOptions
-        {
-            ReferenceHandler = ReferenceHandler.Preserve
-        };
 
         public ProductController(ApplicationDbContext dbContext)
         {
@@ -33,7 +29,46 @@ namespace pos_system.Controllers
             .Include(p => p.Supplier)
             .ToList();
 
-            return Ok(JsonSerializer.Serialize(products, options));
+            var result = products.Select(p => new
+            {
+                p.ProductId,
+                p.ProductCode,
+                p.DepartmentId,
+                p.CategoryId,
+                p.SupplierId,
+                p.CostPrice,
+                p.SellingPrice,
+                p.WholesalePrice,
+                p.MarkedPrice,
+                p.Warranty,
+                p.Desc,
+                p.Unit,
+                Department = new
+                {
+                    p.Department?.DepartmentId,
+                    p.Department?.DepartmentName,
+                    p.Department?.Desc
+                },
+                Category = new
+                {
+                    p.Category?.CategoryId,
+                    p.Category?.Name,
+                    p.Category?.Desc
+                },
+                Supplier = new
+                {
+                    p.Supplier?.SupplierId,
+                    p.Supplier?.SupplierName,
+                    p.Supplier?.ContactPerson,
+                    p.Supplier?.Email,
+                    p.Supplier?.Mobile1,
+                    p.Supplier?.Mobile2,
+                    p.Supplier?.Address,
+
+                }
+            }).ToList();
+
+            return Ok(result);
         }
 
         [HttpGet]

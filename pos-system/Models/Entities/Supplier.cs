@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace pos_system.Models.Entities
 {
@@ -16,6 +17,7 @@ namespace pos_system.Models.Entities
         [Precision(18, 2)]
         public required decimal CreditLimit { get; set; }
 
+        [JsonIgnore]
         public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

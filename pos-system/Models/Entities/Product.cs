@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace pos_system.Models.Entities
 {
@@ -21,8 +22,11 @@ namespace pos_system.Models.Entities
         public string? Desc { get; set; }
         public string? Unit { get; set; }
 
+        [JsonIgnore]
         public Department? Department { get; set; }
+        [JsonIgnore]
         public Category? Category { get; set; }
+        [JsonIgnore]
         public Supplier? Supplier { get; set; }
     }
 }
