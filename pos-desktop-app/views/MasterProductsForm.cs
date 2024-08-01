@@ -1,6 +1,7 @@
 ﻿using MetroFramework;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
+using Newtonsoft.Json;
 using pos_desktop_app.models;
 using pos_desktop_app.services;
 using pos_desktop_app.utils;
@@ -12,6 +13,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -57,8 +59,9 @@ namespace pos_desktop_app.views
                 HttpResponseMessage depRes = await _apiDepartmentService.getDepartment();
                 HttpResponseMessage supRes = await _apiSupplierService.getSuppliers();
                 HttpResponseMessage catRes = await _apiCategoryService.getCategories();
+                HttpResponseMessage prodRes = await _apiProductService.getProducts();
 
-                if (depRes.IsSuccessStatusCode && supRes.IsSuccessStatusCode && catRes.IsSuccessStatusCode)
+                if (depRes.IsSuccessStatusCode && supRes.IsSuccessStatusCode && catRes.IsSuccessStatusCode && prodRes.IsSuccessStatusCode)
                 {
                     refreshUi.RefreshCombo<Department>(depRes, cb_department, "DepartmentId", "DepartmentName");
                     refreshUi.RefreshCombo<Supplier>(supRes, cb_supplier, "SupplierId", "SupplierName");
@@ -67,6 +70,9 @@ namespace pos_desktop_app.views
                     //units and warranty
                     refreshUi.RefreshComboWithList<ComboBoxItem>(warrantyItems, cb_warranty, "Value" , "DisplayName");
                     refreshUi.RefreshComboWithList<ComboBoxItem>(unitItems, cb_unit, "Value" , "DisplayName");
+
+                    //setup table
+                    refreshUi.RefreshDgv<Product>(prodRes, dgv_products);
                 }
                 else
                 {
@@ -112,11 +118,15 @@ namespace pos_desktop_app.views
             }
         }
 
-        private void btn_product_add_Click(object sender, EventArgs e)
+        private async void btn_product_add_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(tb_product_code.Text) || string.IsNullOrEmpty(tb_cost_price.Text) || string.IsNullOrEmpty(tb_selling_price.Text) || string.IsNullOrEmpty(tb_wholesale_price.Text))
             {
                 MetroMessageBox.Show(this, "Please fill the all required fields..!" , "Empty Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                
             }
         }
     }
