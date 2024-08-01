@@ -7,9 +7,11 @@ namespace pos_system.Models.Entities
     {
         public int ProductId { get; set; }
         public required string ProductCode { get; set; }
+        public required string ProductName { get; set; }
         public required int DepartmentId { get; set; }
         public required int CategoryId { get; set; }
         public required int SupplierId { get; set; }
+
         [Precision(18, 2)]
         public required string CostPrice { get; set; }
         [Precision(18, 2)]

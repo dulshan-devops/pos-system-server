@@ -33,6 +33,7 @@ namespace pos_system.Controllers
             {
                 p.ProductId,
                 p.ProductCode,
+                p.ProductName,
                 p.DepartmentId,
                 p.CategoryId,
                 p.SupplierId,
@@ -88,6 +89,7 @@ namespace pos_system.Controllers
             var product = new Product()
             {
                 ProductCode = addProduct.ProductCode,
+                ProductName = addProduct.ProductName,
                 DepartmentId = addProduct.DepartmentId,
                 CategoryId = addProduct.CategoryId,
                 SupplierId = addProduct.SupplierId,
@@ -114,6 +116,7 @@ namespace pos_system.Controllers
             if (product is null) return NotFound();
 
                 product.ProductCode = updateProduct.ProductCode;
+                product.ProductName = updateProduct.ProductName;
                 product.DepartmentId = updateProduct.DepartmentId;
                 product.CategoryId = updateProduct.CategoryId;
                 product.SupplierId = updateProduct.SupplierId;

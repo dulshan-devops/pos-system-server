@@ -92,6 +92,10 @@ namespace pos_system.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SellingPrice")
                         .IsRequired()
                         .HasPrecision(18, 2)

@@ -11,7 +11,7 @@ using pos_system.Data;
 namespace pos_system.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240724143955_Product")]
+    [Migration("20240801104456_Product")]
     partial class Product
     {
         /// <inheritdoc />
@@ -92,6 +92,10 @@ namespace pos_system.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
