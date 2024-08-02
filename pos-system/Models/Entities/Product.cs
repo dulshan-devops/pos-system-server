@@ -13,14 +13,14 @@ namespace pos_system.Models.Entities
         public required int SupplierId { get; set; }
 
         [Precision(18, 2)]
-        public required string CostPrice { get; set; }
+        public required decimal CostPrice { get; set; }
         [Precision(18, 2)]
-        public required string SellingPrice { get; set; }
+        public required decimal SellingPrice { get; set; }
         [Precision(18, 2)]
-        public string? WholesalePrice { get; set; }
+        public decimal? WholesalePrice { get; set; }
         [Precision(18, 2)]
-        public string? MarkedPrice { get; set; }
-        public required string Warranty { get; set; }
+        public decimal? MarkedPrice { get; set; }
+        public required bool Warranty { get; set; }
         public string? Desc { get; set; }
         public string? Unit { get; set; }
 
