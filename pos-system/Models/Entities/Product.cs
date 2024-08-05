@@ -20,7 +20,7 @@ namespace pos_system.Models.Entities
         public decimal? WholesalePrice { get; set; }
         [Precision(18, 2)]
         public decimal? MarkedPrice { get; set; }
-        public required bool Warranty { get; set; }
+        public required int Warranty { get; set; }
         public string? Desc { get; set; }
         public string? Unit { get; set; }
 

@@ -12,7 +12,7 @@ using pos_system.Data;
 namespace pos_system.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240802102838_Product")]
+    [Migration("20240803170155_Product")]
     partial class Product
     {
         /// <inheritdoc />
@@ -109,8 +109,8 @@ namespace pos_system.Migrations
                     b.Property<string>("Unit")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Warranty")
-                        .HasColumnType("bit");
+                    b.Property<int>("Warranty")
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("WholesalePrice")
                         .HasPrecision(18, 2)

@@ -25,7 +25,7 @@ namespace pos_system.Migrations
                     SellingPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     WholesalePrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
                     MarkedPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
-                    Warranty = table.Column<bool>(type: "bit", nullable: false),
+                    Warranty = table.Column<int>(type: "int", nullable: false),
                     Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Unit = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

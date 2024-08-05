@@ -106,8 +106,8 @@ namespace pos_system.Migrations
                     b.Property<string>("Unit")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Warranty")
-                        .HasColumnType("bit");
+                    b.Property<int>("Warranty")
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("WholesalePrice")
                         .HasPrecision(18, 2)
