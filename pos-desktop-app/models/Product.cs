@@ -13,14 +13,15 @@ namespace pos_desktop_app.models
     {
         public int ProductId { get; set; }
         public string ProductCode { get; set; }
+        public string ProductName { get; set; }
         public int DepartmentId { get; set; }
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public int SupplierId { get; set; }
-        public string CostPrice { get; set; }
-        public string SellingPrice { get; set; }
-        public string WholesalePrice { get; set; }
-        public string MarkedPrice { get; set; }
-        public string Warranty { get; set; }
+        public decimal CostPrice { get; set; }
+        public decimal SellingPrice { get; set; }
+        public decimal? WholesalePrice { get; set; }
+        public decimal? MarkedPrice { get; set; }
+        public int Warranty { get; set; }
         public string Desc { get; set; }
         public string Unit { get; set; }
 

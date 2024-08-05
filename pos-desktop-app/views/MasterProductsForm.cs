@@ -77,11 +77,16 @@ namespace pos_desktop_app.views
                 else
                 {
                     // Handle the error
-                    MessageBox.Show($"Failed to fetch combo boxes:\n" +
+                    MetroMessageBox.Show(this, $"Failed to fetch combo boxes:\n" +
+                        $"Departments: {depRes.StatusCode}\n" +
+                        $"Suppliers: {supRes.StatusCode}\n" +
+                        $"Categories: {catRes.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    /*MessageBox.Show($"Failed to fetch combo boxes:\n" +
                         $"Departments: {depRes.StatusCode}\n" +
                         $"Suppliers: {supRes.StatusCode}\n" +
                         $"Categories: {catRes.StatusCode}",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);*/
                 }
             }
             catch (Exception ex)
@@ -126,6 +131,40 @@ namespace pos_desktop_app.views
             }
             else
             {
+                int depId = (cb_department.SelectedItem as Department)?.DepartmentId ?? -1;
+                int catId = (cb_category.SelectedItem as Catergory)?.CategoryId ?? -1;
+                int supId = (cb_supplier.SelectedItem as Supplier)?.SupplierId ?? -1;
+                //int warranty = (cb_warranty.SelectedItem as (List)warrantyItems)?.SupplierId ?? -1;
+
+                Product newProduct = new Product
+                {
+                    ProductCode = tb_product_code.Text,
+                    ProductName = tb_product_name.Text,
+                    DepartmentId = depId,
+                    CategoryId = catId,
+                    SupplierId = supId,
+                    CostPrice = decimal.Parse(tb_cost_price.Text),
+                    SellingPrice = decimal.Parse(tb_selling_price.Text),
+                    WholesalePrice = decimal.Parse(tb_wholesale_price.Text),
+                    MarkedPrice = decimal.Parse(tb_marked_price.Text),
+                    Warranty = (int)cb_warranty.SelectedValue,
+                    Desc = tb_desc.Text,
+                    Unit = cb_unit.SelectedValue.ToString(),
+                };
+
+                
+
+                HttpResponseMessage response = await _apiProductService.saveProduct(newProduct);
+                if(response.IsSuccessStatusCode)
+                {
+                    HttpResponseMessage prodResponse = await _apiProductService.getProducts();
+                    refreshUi.RefreshDgv<Product>(prodResponse, dgv_products);
+                    MetroMessageBox.Show(this, "Product Saved Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, $"{response.ReasonPhrase}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 
             }
         }
