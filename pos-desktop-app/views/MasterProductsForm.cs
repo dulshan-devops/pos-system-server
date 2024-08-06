@@ -168,5 +168,94 @@ namespace pos_desktop_app.views
                 
             }
         }
+
+        private void dgv_products_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int selectedRowIndex = dgv_products.SelectedRows[0].Index;
+                Product selectedProduct = (Product)dgv_products.Rows[selectedRowIndex].DataBoundItem;
+
+                DataGridViewRow selectedRow = dgv_products.Rows[e.RowIndex];
+                tb_product_code.Text = selectedRow.Cells["ProductCode"].Value.ToString();
+                tb_cost_price.Text = selectedRow.Cells["CostPrice"].Value.ToString();
+                tb_selling_price.Text = selectedRow.Cells["SellingPrice"].Value.ToString();
+                tb_wholesale_price.Text = selectedRow.Cells["WholesalePrice"].Value.ToString();
+                tb_marked_price.Text = selectedRow.Cells["MarkedPrice"].Value.ToString();
+                tb_desc.Text = selectedRow.Cells["Desc"].Value.ToString();
+                tb_product_name.Text = selectedRow.Cells["ProductName"].Value.ToString();
+            }
+        }
+
+        private async void btn_product_delete_Click(object sender, EventArgs e)
+        {
+            int selectedRowIndex = dgv_products.SelectedRows[0].Index;
+            Product selectedProduct = (Product)dgv_products.Rows[selectedRowIndex].DataBoundItem;
+            if (selectedProduct.ProductId == null)
+            {
+                MetroMessageBox.Show(this, "Please select category to delete", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                HttpResponseMessage response = await _apiProductService.deleteProduct(selectedProduct);
+                // Refresh the DataGridView
+                HttpResponseMessage prodResponse = await _apiProductService.getProducts();
+                refreshUi.RefreshDgv<Product>(prodResponse, dgv_products);
+                MetroMessageBox.Show(this, "Product Deleted Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private async void btn_product_update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedRowIndex = dgv_products.SelectedRows[0].Index;
+                Product selectedProduct = (Product)dgv_products.Rows[selectedRowIndex].DataBoundItem;
+                int depId = (cb_department.SelectedItem as Department)?.DepartmentId ?? -1;
+                int catId = (cb_category.SelectedItem as Catergory)?.CategoryId ?? -1;
+                int supId = (cb_supplier.SelectedItem as Supplier)?.SupplierId ?? -1;
+
+                if (tb_product_code.Text == "" || selectedProduct.ProductId == null)
+                {
+                    MetroMessageBox.Show(this, "Please select product to update", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    selectedProduct.ProductCode = tb_product_code.Text;
+                    selectedProduct.DepartmentId = depId;
+                    selectedProduct.CategoryId = catId;
+                    selectedProduct.SupplierId = supId;
+                    selectedProduct.CostPrice = decimal.Parse(tb_cost_price.Text);
+                    selectedProduct.SellingPrice = decimal.Parse(tb_selling_price.Text);
+                    selectedProduct.WholesalePrice = decimal.Parse(tb_wholesale_price.Text);
+                    selectedProduct.MarkedPrice = decimal.Parse(tb_wholesale_price.Text);
+                    selectedProduct.Unit = cb_unit.SelectedValue.ToString();
+                    selectedProduct.Warranty = (int)cb_warranty.SelectedValue;
+                    selectedProduct.ProductName = tb_product_name.Text;
+                    selectedProduct.Desc = tb_desc.Text;
+
+                    HttpResponseMessage response = await _apiProductService.updateProduct(selectedProduct);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MetroMessageBox.Show(this, $"{selectedProduct.ProductCode} Product Updated Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Refresh the DataGridView
+                        HttpResponseMessage prodResponse = await _apiProductService.getProducts();
+                        refreshUi.RefreshDgv<Product>(prodResponse, dgv_products);
+                    }
+                    else
+                    {
+                        Clipboard.SetText(response.ReasonPhrase);
+                        // Handle the error
+                        MetroMessageBox.Show(this, $"{response.ReasonPhrase}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Clipboard.SetText(ex.Message);
+                MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

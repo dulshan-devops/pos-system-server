@@ -34,5 +34,20 @@ namespace pos_desktop_app.services
             HttpResponseMessage response = await _httpClient.PostAsync("/api/Product", content);
             return response;
         }
+
+        public async Task<HttpResponseMessage> updateProduct(Product product)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await _httpClient.PutAsync($"/api/Product?id={product.ProductId}", content);
+            //Console.WriteLine(category);
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> deleteProduct(Product product)
+        {
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"/api/Product?id={product.ProductId}");
+            return response;
+        }
     }
 }
