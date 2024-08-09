@@ -42,5 +42,11 @@ namespace pos_desktop_app.views
             MasterProductsForm pf = new MasterProductsForm();
             pf.Show();
         }
+
+        private void mt_pos_console_Click(object sender, EventArgs e)
+        {
+            MasterPosConsole mpc = new MasterPosConsole();
+            mpc.Show();
+        }
     }
 }

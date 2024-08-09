@@ -38,6 +38,7 @@
             this.mt_categories = new MetroFramework.Controls.MetroTile();
             this.mt_products = new MetroFramework.Controls.MetroTile();
             this.mt_customers = new MetroFramework.Controls.MetroTile();
+            this.mt_pos_console = new MetroFramework.Controls.MetroTile();
             this.tab_tools = new System.Windows.Forms.TabPage();
             this.tab_reports = new System.Windows.Forms.TabPage();
             this.metroTabControl1.SuspendLayout();
@@ -55,7 +56,7 @@
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.ShowToolTips = true;
-            this.metroTabControl1.Size = new System.Drawing.Size(1192, 699);
+            this.metroTabControl1.Size = new System.Drawing.Size(1067, 675);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -67,12 +68,13 @@
             this.tab_master.Controls.Add(this.flp_dashboard);
             this.tab_master.Location = new System.Drawing.Point(4, 38);
             this.tab_master.Name = "tab_master";
-            this.tab_master.Size = new System.Drawing.Size(1184, 657);
+            this.tab_master.Size = new System.Drawing.Size(1059, 633);
             this.tab_master.TabIndex = 0;
             this.tab_master.Text = "Master";
             // 
             // flp_dashboard
             // 
+            this.flp_dashboard.Controls.Add(this.mt_pos_console);
             this.flp_dashboard.Controls.Add(this.mt_departments);
             this.flp_dashboard.Controls.Add(this.mt_users);
             this.flp_dashboard.Controls.Add(this.mt_suppliers);
@@ -82,13 +84,13 @@
             this.flp_dashboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flp_dashboard.Location = new System.Drawing.Point(0, 0);
             this.flp_dashboard.Name = "flp_dashboard";
-            this.flp_dashboard.Size = new System.Drawing.Size(1184, 657);
+            this.flp_dashboard.Size = new System.Drawing.Size(1059, 633);
             this.flp_dashboard.TabIndex = 0;
             // 
             // mt_departments
             // 
             this.mt_departments.ActiveControl = null;
-            this.mt_departments.Location = new System.Drawing.Point(3, 3);
+            this.mt_departments.Location = new System.Drawing.Point(154, 3);
             this.mt_departments.Name = "mt_departments";
             this.mt_departments.Size = new System.Drawing.Size(145, 127);
             this.mt_departments.Style = MetroFramework.MetroColorStyle.Green;
@@ -107,7 +109,7 @@
             // mt_users
             // 
             this.mt_users.ActiveControl = null;
-            this.mt_users.Location = new System.Drawing.Point(154, 3);
+            this.mt_users.Location = new System.Drawing.Point(305, 3);
             this.mt_users.Name = "mt_users";
             this.mt_users.Size = new System.Drawing.Size(145, 127);
             this.mt_users.Style = MetroFramework.MetroColorStyle.Green;
@@ -125,7 +127,7 @@
             // mt_suppliers
             // 
             this.mt_suppliers.ActiveControl = null;
-            this.mt_suppliers.Location = new System.Drawing.Point(305, 3);
+            this.mt_suppliers.Location = new System.Drawing.Point(456, 3);
             this.mt_suppliers.Name = "mt_suppliers";
             this.mt_suppliers.Size = new System.Drawing.Size(145, 127);
             this.mt_suppliers.Style = MetroFramework.MetroColorStyle.Green;
@@ -144,7 +146,7 @@
             // mt_categories
             // 
             this.mt_categories.ActiveControl = null;
-            this.mt_categories.Location = new System.Drawing.Point(456, 3);
+            this.mt_categories.Location = new System.Drawing.Point(607, 3);
             this.mt_categories.Name = "mt_categories";
             this.mt_categories.Size = new System.Drawing.Size(145, 127);
             this.mt_categories.Style = MetroFramework.MetroColorStyle.Green;
@@ -163,7 +165,7 @@
             // mt_products
             // 
             this.mt_products.ActiveControl = null;
-            this.mt_products.Location = new System.Drawing.Point(607, 3);
+            this.mt_products.Location = new System.Drawing.Point(758, 3);
             this.mt_products.Name = "mt_products";
             this.mt_products.Size = new System.Drawing.Size(145, 127);
             this.mt_products.Style = MetroFramework.MetroColorStyle.Green;
@@ -182,7 +184,7 @@
             // mt_customers
             // 
             this.mt_customers.ActiveControl = null;
-            this.mt_customers.Location = new System.Drawing.Point(758, 3);
+            this.mt_customers.Location = new System.Drawing.Point(909, 3);
             this.mt_customers.Name = "mt_customers";
             this.mt_customers.Size = new System.Drawing.Size(145, 127);
             this.mt_customers.Style = MetroFramework.MetroColorStyle.Green;
@@ -197,12 +199,31 @@
             this.mt_customers.UseStyleColors = true;
             this.mt_customers.UseTileImage = true;
             // 
+            // mt_pos_console
+            // 
+            this.mt_pos_console.ActiveControl = null;
+            this.mt_pos_console.Location = new System.Drawing.Point(3, 3);
+            this.mt_pos_console.Name = "mt_pos_console";
+            this.mt_pos_console.Size = new System.Drawing.Size(145, 127);
+            this.mt_pos_console.Style = MetroFramework.MetroColorStyle.Blue;
+            this.mt_pos_console.TabIndex = 7;
+            this.mt_pos_console.Text = "Pos Console";
+            this.mt_pos_console.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.mt_pos_console.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.mt_pos_console.TileImage = ((System.Drawing.Image)(resources.GetObject("mt_pos_console.TileImage")));
+            this.mt_pos_console.TileImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.mt_pos_console.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.mt_pos_console.UseSelectable = true;
+            this.mt_pos_console.UseStyleColors = true;
+            this.mt_pos_console.UseTileImage = true;
+            this.mt_pos_console.Click += new System.EventHandler(this.mt_pos_console_Click);
+            // 
             // tab_tools
             // 
             this.tab_tools.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tab_tools.Location = new System.Drawing.Point(4, 38);
             this.tab_tools.Name = "tab_tools";
-            this.tab_tools.Size = new System.Drawing.Size(1184, 657);
+            this.tab_tools.Size = new System.Drawing.Size(1173, 637);
             this.tab_tools.TabIndex = 1;
             this.tab_tools.Text = "Tools";
             // 
@@ -211,7 +232,7 @@
             this.tab_reports.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tab_reports.Location = new System.Drawing.Point(4, 38);
             this.tab_reports.Name = "tab_reports";
-            this.tab_reports.Size = new System.Drawing.Size(1184, 657);
+            this.tab_reports.Size = new System.Drawing.Size(1173, 637);
             this.tab_reports.TabIndex = 2;
             this.tab_reports.Text = "Reports";
             // 
@@ -219,7 +240,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1232, 779);
+            this.ClientSize = new System.Drawing.Size(1107, 755);
             this.Controls.Add(this.metroTabControl1);
             this.Name = "Dashboard";
             this.Style = MetroFramework.MetroColorStyle.Green;
@@ -245,5 +266,6 @@
         private MetroFramework.Controls.MetroTile mt_customers;
         private MetroFramework.Controls.MetroTile mt_users;
         private MetroFramework.Controls.MetroTile mt_products;
+        private MetroFramework.Controls.MetroTile mt_pos_console;
     }
 }
