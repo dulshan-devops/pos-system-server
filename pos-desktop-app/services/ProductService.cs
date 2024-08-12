@@ -28,10 +28,10 @@ namespace pos_desktop_app.services
             return response;
         }
 
-        public async Task<HttpResponseMessage> saveProduct(Product product)
+        public async Task<HttpResponseMessage> saveProduct(Product product , int warrantyPeriod)
         {
             var content = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _httpClient.PostAsync("/api/Product", content);
+            HttpResponseMessage response = await _httpClient.PostAsync($"/api/Product/{warrantyPeriod}", content);
             return response;
         }
 

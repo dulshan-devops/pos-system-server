@@ -125,12 +125,16 @@ namespace pos_desktop_app.views
 
         private async void btn_product_add_Click(object sender, EventArgs e)
         {
+            HttpResponseMessage response;
             if (string.IsNullOrEmpty(tb_product_code.Text) || string.IsNullOrEmpty(tb_cost_price.Text) || string.IsNullOrEmpty(tb_selling_price.Text) || string.IsNullOrEmpty(tb_wholesale_price.Text))
             {
                 MetroMessageBox.Show(this, "Please fill the all required fields..!" , "Empty Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
+                // Cast the selected item to ComboBoxItem
+                ComboBoxItem warranty = (ComboBoxItem)cb_warranty.SelectedItem;
+
                 int depId = (cb_department.SelectedItem as Department)?.DepartmentId ?? -1;
                 int catId = (cb_category.SelectedItem as Catergory)?.CategoryId ?? -1;
                 int supId = (cb_supplier.SelectedItem as Supplier)?.SupplierId ?? -1;
@@ -152,9 +156,18 @@ namespace pos_desktop_app.views
                     Unit = cb_unit.SelectedValue.ToString(),
                 };
 
-                
+                // Check if "No" is selected in the warranty ComboBox
+                if (warranty.Value.Equals(0))
+                {
+                    //no warranty
+                    response = await _apiProductService.saveProduct(newProduct, 0);
+                }
+                else
+                {
+                    //warranty have
+                    response = await _apiProductService.saveProduct(newProduct, int.Parse(tb_warranty_period.Text));
+                }
 
-                HttpResponseMessage response = await _apiProductService.saveProduct(newProduct);
                 if(response.IsSuccessStatusCode)
                 {
                     HttpResponseMessage prodResponse = await _apiProductService.getProducts();
