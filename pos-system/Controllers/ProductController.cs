@@ -6,6 +6,7 @@ using pos_system.Models.Entities;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using Product = pos_system.Models.Entities.Product;
+using ProductWarrantyPeriod = pos_system.Models.Entities.ProductWarrantyPeriod;
 
 namespace pos_system.Controllers
 {
@@ -84,8 +85,10 @@ namespace pos_system.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProducts(Product addProduct)
+        [Route("{warrantyPeriod?}")]
+        public IActionResult AddProducts(Product addProduct , int warrantyPeriod)
         {
+            // Create the product object
             var product = new Product()
             {
                 ProductCode = addProduct.ProductCode,
@@ -102,8 +105,34 @@ namespace pos_system.Controllers
                 Unit = addProduct.Unit
             };
 
+            // Save the product to the database to generate ProductId
             dbContext.Products.Add(product);
-            dbContext.SaveChanges();
+            dbContext.SaveChanges(); // ProductId is generated here
+
+            // Ensure that ProductId has been generated
+            if (product.ProductId == 0)
+            {
+                throw new Exception("ProductId not generated.");
+            }
+
+            // If the product has a warranty, add the ProductWarrantyPeriod
+            if (product.Warranty == 1)
+            {
+                // Verify that the warranty period is valid
+                if (warrantyPeriod <= 0)
+                {
+                    throw new Exception("Please provide a valid warranty period for this product.");
+                }
+
+                var productWarrantyPeriod = new ProductWarrantyPeriod()
+                {
+                    ProductId = product.ProductId, // Use the generated ProductId
+                    WarrantyPeriod = warrantyPeriod
+                };
+
+                dbContext.ProductWarrantyPeriod.Add(productWarrantyPeriod);
+                dbContext.SaveChanges(); // Save ProductWarrantyPeriod
+            }
 
             return Ok(product);
         }
