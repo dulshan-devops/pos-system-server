@@ -52,5 +52,18 @@ namespace pos_desktop_app.views
                 MetroMessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void dgv_products_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int selectedRowIndex = dgv_products.SelectedRows[0].Index;
+                ProductV1 selectedProduct = (ProductV1)dgv_products.Rows[selectedRowIndex].DataBoundItem;
+
+                DataGridViewRow selectedRow = dgv_products.Rows[e.RowIndex];
+                tb_selected_product.Text = selectedRow.Cells["ProductName"].Value.ToString();
+                tb_selected_product_qty.Text = 1.ToString();
+            }
+        }
     }
 }
