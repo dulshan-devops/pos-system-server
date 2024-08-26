@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using Newtonsoft.Json;
 using pos_desktop_app.models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +27,13 @@ namespace pos_desktop_app.services
             return response;
         }
 
-        public async Task<HttpResponseMessage> saveProduct(Product product , int warrantyPeriod)
+        public async Task<HttpResponseMessage> getProductById(int productId)
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"/api/Product/{productId}");
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> saveProduct(Product product, int warrantyPeriod)
         {
             var content = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.PostAsync($"/api/Product/{warrantyPeriod}", content);
@@ -49,5 +54,14 @@ namespace pos_desktop_app.services
             HttpResponseMessage response = await _httpClient.DeleteAsync($"/api/Product?id={product.ProductId}");
             return response;
         }
+
+        // cache products
+        public async Task<HttpResponseMessage> cacheProductToCart(Product product)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _httpClient.PostAsync($"cache/product/add", content);
+            return response;
+        }
+
     }
 }

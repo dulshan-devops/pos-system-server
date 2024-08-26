@@ -11,6 +11,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,6 +24,8 @@ namespace pos_desktop_app.views
     {
         private ProductService _apiProductService;
         private UiRefresher refreshUi = new UiRefresher();
+        private ProductV1 selectedProduct = new ProductV1();
+        private DataGridViewRow selectedRow = new DataGridViewRow();
         public MasterPosConsole()
         {
             InitializeComponent();
@@ -58,11 +61,44 @@ namespace pos_desktop_app.views
             if (e.RowIndex >= 0)
             {
                 int selectedRowIndex = dgv_products.SelectedRows[0].Index;
-                ProductV1 selectedProduct = (ProductV1)dgv_products.Rows[selectedRowIndex].DataBoundItem;
+                selectedProduct = (ProductV1)dgv_products.Rows[selectedRowIndex].DataBoundItem;
 
-                DataGridViewRow selectedRow = dgv_products.Rows[e.RowIndex];
+                selectedRow = dgv_products.Rows[e.RowIndex];
                 tb_selected_product.Text = selectedRow.Cells["ProductName"].Value.ToString();
                 tb_selected_product_qty.Text = 1.ToString();
+            }
+        }
+
+        private async void btn_add_to_cart_Click(object sender, EventArgs e)
+        {
+            HttpResponseMessage response;
+            HttpResponseMessage selectedProductRes;
+            if (string.IsNullOrEmpty(tb_selected_product.Text) || string.IsNullOrEmpty(tb_selected_product_qty.Text))
+            {
+                MetroMessageBox.Show(this, "Please fill the all required fields..!", "Empty Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                //fetch and setup product : ProductV1 -> Product
+                selectedProductRes = await _apiProductService.getProductById(selectedProduct.ProductId);
+                if(selectedProductRes.IsSuccessStatusCode)
+                {
+                    Product product = await selectedProductRes.Content.ReadFromJsonAsync<Product>();
+                    response = await _apiProductService.cacheProductToCart(product);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MetroMessageBox.Show(this, "start the ui changes!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, $"{response.ReasonPhrase}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, $"{selectedProductRes.ReasonPhrase}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

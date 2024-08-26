@@ -5,6 +5,7 @@ namespace pos_system.Models.Custom_Entities
 {
     public class ProductV1
     {
+        public int ProductId { get; set; }
         public string ProductCode { get; set; }
         public string ProductName { get; set; }
         public decimal SellingPrice { get; set; }
