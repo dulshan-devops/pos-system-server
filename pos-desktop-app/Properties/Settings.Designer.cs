@@ -26,6 +26,15 @@ namespace pos_desktop_app.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://nova-pos-system-api.azurewebsites.net")]
+        public string ApiBaseUrl1 {
+            get {
+                return ((string)(this["ApiBaseUrl1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44363")]
         public string ApiBaseUrl {
             get {
                 return ((string)(this["ApiBaseUrl"]));

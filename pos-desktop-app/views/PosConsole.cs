@@ -1,6 +1,7 @@
 ﻿using MetroFramework;
 using MetroFramework.Forms;
 using pos_desktop_app.models;
+using pos_desktop_app.models.Custom_Models;
 using pos_desktop_app.services;
 using pos_desktop_app.utils;
 using pos_system.Models.Custom_Entities;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -26,6 +28,7 @@ namespace pos_desktop_app.views
         private UiRefresher refreshUi = new UiRefresher();
         private ProductV1 selectedProduct = new ProductV1();
         private DataGridViewRow selectedRow = new DataGridViewRow();
+        CultureInfo sriLankanCulture = new CultureInfo("si-LK");
         public MasterPosConsole()
         {
             InitializeComponent();
@@ -36,19 +39,9 @@ namespace pos_desktop_app.views
         {
             try
             {
-                HttpResponseMessage prodRes = await _apiProductService.getProducts();
-
-                if (prodRes.IsSuccessStatusCode)
-                {
-                    //setup table
-                    refreshUi.RefreshDgv<ProductV1>(prodRes, dgv_products);
-                }
-                else
-                {
-                    // Handle the error
-                    MetroMessageBox.Show(this, $"Failed to fetch :\n" +
-                        $"Products: {prodRes.StatusCode}\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                setupCachedProductInCart();
+                setupProductsInProductList();
+                setupCachedProductTotalInCart();
             }
             catch (Exception ex)
             {
@@ -79,27 +72,86 @@ namespace pos_desktop_app.views
             }
             else
             {
-                //fetch and setup product : ProductV1 -> Product
-                selectedProductRes = await _apiProductService.getProductById(selectedProduct.ProductId);
-                if(selectedProductRes.IsSuccessStatusCode)
+                //fetch and setup product : ProductV1 -> ProductInCart
+                ProductInCart product = new ProductInCart()
                 {
-                    Product product = await selectedProductRes.Content.ReadFromJsonAsync<Product>();
-                    response = await _apiProductService.cacheProductToCart(product);
+                    ProductId = selectedProduct.ProductId,
+                    ProductName = selectedProduct.ProductName,
+                    Quantity = double.Parse(tb_selected_product_qty.Text),
+                    Price = (double)selectedProduct.SellingPrice,
+                    Total = double.Parse(tb_selected_product_qty.Text) * (double)selectedProduct.SellingPrice,
+                };
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        MetroMessageBox.Show(this, "start the ui changes!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MetroMessageBox.Show(this, $"{response.ReasonPhrase}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                response = await _apiProductService.cacheProductToCart(product);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    setupCachedProductInCart();
+                    setupCachedProductTotalInCart();
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, $"{selectedProductRes.ReasonPhrase}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, $"{response.ReasonPhrase}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
+        #region utils functions
+        public async void setupCachedProductInCart()
+        {
+            HttpResponseMessage cachedProductsRes = await _apiProductService.getCachedProductInCart();
+
+            if (cachedProductsRes.IsSuccessStatusCode)
+            {
+                refreshUi.RefreshDgv<ProductInCart>(cachedProductsRes, dgv_product_in_cart);
+
+                // Update the DataGridView to use the formatted properties
+                dgv_product_in_cart.Columns["Price"].DataPropertyName = "PriceFormatted";
+                dgv_product_in_cart.Columns["Total"].DataPropertyName = "TotalFormatted";
+
+                // Hide the auto-generated formatted columns
+                if (dgv_product_in_cart.Columns.Contains("ProductId"))
+                {
+                    dgv_product_in_cart.Columns["ProductId"].Visible = false;
+                }
+                if (dgv_product_in_cart.Columns.Contains("PriceFormatted"))
+                {
+                    dgv_product_in_cart.Columns["PriceFormatted"].Visible = false;
+                }
+                if (dgv_product_in_cart.Columns.Contains("TotalFormatted"))
+                {
+                    dgv_product_in_cart.Columns["TotalFormatted"].Visible = false;
+                }
+            }
+        }
+
+        public async void setupProductsInProductList()
+        {
+            HttpResponseMessage prodRes = await _apiProductService.getProducts();
+
+            if (prodRes.IsSuccessStatusCode)
+            {
+                //setup table
+                refreshUi.RefreshDgv<ProductV1>(prodRes, dgv_products);
+            }
+            else
+            {
+                // Handle the error
+                MetroMessageBox.Show(this, $"Failed to fetch :\n" +
+                    $"Products: {prodRes.StatusCode}\n", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public async void setupCachedProductTotalInCart()
+        {
+            HttpResponseMessage totalRes = await _apiProductService.getCachedProductsTotalInCart();
+            if (totalRes.IsSuccessStatusCode)
+            {
+                string totalAsString = await totalRes.Content.ReadAsStringAsync();
+                decimal totalAmount = decimal.Parse(totalAsString); // Assuming the total is a decimal value
+                lbl_total_of_bill.Text = totalAmount.ToString("C", sriLankanCulture); // "C" formats it as currency
+            }
+        }
+        #endregion
     }
 }

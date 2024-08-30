@@ -2,8 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="pos_desktop_app.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ApiBaseUrl" Type="System.String" Scope="Application">
+    <Setting Name="ApiBaseUrl1" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://nova-pos-system-api.azurewebsites.net</Value>
+    </Setting>
+    <Setting Name="ApiBaseUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://localhost:44363</Value>
     </Setting>
   </Settings>
 </SettingsFile>

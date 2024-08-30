@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using pos_desktop_app.models;
+using pos_desktop_app.models.Custom_Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -56,10 +57,25 @@ namespace pos_desktop_app.services
         }
 
         // cache products
-        public async Task<HttpResponseMessage> cacheProductToCart(Product product)
+        public async Task<HttpResponseMessage> cacheProductToCart(ProductInCart product)
         {
+            //check already product in cart
+            //yes : update the qty
+            //no : add to cart
             var content = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.PostAsync($"cache/product/add", content);
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> getCachedProductInCart()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("cache/product/retrieve");
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> getCachedProductsTotalInCart()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync("cache/cart/total");
             return response;
         }
 

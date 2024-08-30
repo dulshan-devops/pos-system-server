@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Caching.Distributed;
 using pos_system.Models.Entities;
 using Newtonsoft.Json;
+using pos_desktop_app.models.Custom_Models;
 
 namespace pos_system.Controllers
 {
@@ -15,7 +16,7 @@ namespace pos_system.Controllers
         }
 
         [HttpPost("cache/product/add")]
-        public async Task<IActionResult> AddToCache([FromBody] Product product)
+        public async Task<IActionResult> AddToCache([FromBody] ProductInCart product)
         {
             var cachedProducts = await GetCachedProducts();
             cachedProducts.Add(product);
@@ -45,15 +46,24 @@ namespace pos_system.Controllers
             return Ok(cachedProducts);
         }
 
-        private async Task<List<Product>> GetCachedProducts()
+        [HttpGet("cache/cart/total")]
+        public async Task<IActionResult> RetrieveCachedProductsTotal()
+        {
+            var cachedProducts = await GetCachedProducts();
+            double total = cachedProducts.Sum(product => product.Price * product.Quantity);
+
+            return Ok(total);
+        }
+
+        private async Task<List<ProductInCart>> GetCachedProducts()
         {
             var cachedData = await _cache.GetStringAsync("cart.products");
             if (!string.IsNullOrEmpty(cachedData))
             {
-                return JsonConvert.DeserializeObject<List<Product>>(cachedData);
+                return JsonConvert.DeserializeObject<List<ProductInCart>>(cachedData);
             }
 
-            return new List<Product>();
+            return new List<ProductInCart>();
         }
 
     }
