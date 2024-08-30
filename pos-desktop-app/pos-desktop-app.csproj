@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="models\Catergory.cs" />
+    <Compile Include="models\Custom Models\ProductInCart.cs" />
     <Compile Include="models\Custom Models\ProductV1.cs" />
     <Compile Include="models\Department.cs" />
     <Compile Include="models\ErrorResponse.cs" />
