@@ -3,6 +3,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using pos_system.Models.Entities;
 using Newtonsoft.Json;
 using pos_desktop_app.models.Custom_Models;
+using System.Diagnostics;
 
 namespace pos_system.Controllers
 {
@@ -19,9 +20,20 @@ namespace pos_system.Controllers
         public async Task<IActionResult> AddToCache([FromBody] ProductInCart product)
         {
             var cachedProducts = await GetCachedProducts();
-            cachedProducts.Add(product);
+            var existingProduct = cachedProducts.FirstOrDefault(p => p.ProductId == product.ProductId);
+
+            if (existingProduct != null)
+            {
+                existingProduct.Quantity += product.Quantity;
+                existingProduct.Total = existingProduct.Price * existingProduct.Quantity;
+            }
+            else
+            {
+                cachedProducts.Add(product);
+            }
 
             var serializedProducts = JsonConvert.SerializeObject(cachedProducts);
+
             var options = new DistributedCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1) // Set your expiration time

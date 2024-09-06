@@ -4,6 +4,7 @@ using pos_desktop_app.models;
 using pos_desktop_app.models.Custom_Models;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,9 +60,15 @@ namespace pos_desktop_app.services
         // cache products
         public async Task<HttpResponseMessage> cacheProductToCart(ProductInCart product)
         {
-            //check already product in cart
-            //yes : update the qty
-            //no : add to cart
+            // Validate product quantity
+            if (product.Quantity <= 0)
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent("Product quantity must be greater than zero.")
+                };
+            }
+
             var content = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.PostAsync($"cache/product/add", content);
             return response;
