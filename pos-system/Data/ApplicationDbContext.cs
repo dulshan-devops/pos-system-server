@@ -19,5 +19,8 @@ namespace pos_system.Data
         public DbSet<ProductWarrantyPeriod> ProductWarrantyPeriod { get; set; }
         public DbSet<PurchaseOrder> PurchaseOrder { get; set; }
         public DbSet<PurchaseOrderItems> PurchaseOrderItems { get; set; }
+        public DbSet<TransactionType> TransactionType { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
+        public DbSet<TransactionItem> TransactionItem { get; set; }
     }
 }
